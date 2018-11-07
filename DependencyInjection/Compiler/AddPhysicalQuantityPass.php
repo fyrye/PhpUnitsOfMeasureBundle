@@ -41,7 +41,7 @@ class AddPhysicalQuantityPass implements CompilerPassInterface
                 $container->removeDefinition($id);
                 //create a QuantityDefinition to proxy the tagged service
                 $class = $serviceDefinition->getClass();
-                $name = basename($class);
+                $name = $this->extractName($class);
                 $container->register($class, QuantityDefinition::class)
                     ->setArguments([$name, $class])
                     ->setPublic(true);

@@ -21,4 +21,14 @@ trait UnitNamingTrait
     {
         return preg_replace('/[^a-z0-9_]/', '', strtolower($name));
     }
+
+    /**
+     * @param string|object $class
+     * @return string
+     * @throws \ReflectionException
+     */
+    private function extractName($class)
+    {
+        return (new \ReflectionClass($class))->getShortName();
+    }
 }
