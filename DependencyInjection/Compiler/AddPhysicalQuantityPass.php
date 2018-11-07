@@ -35,7 +35,7 @@ class AddPhysicalQuantityPass implements CompilerPassInterface
         }
         if ($services = $container->findTaggedServiceIds('php_units_of_measure.extension', true)) {
             $managerDefinition = $container->getDefinition(Manager::class);
-            foreach ($services as $id => $tags) {
+            foreach (\array_keys($services) as $id) {
                 //retrieve the tagged service definition and remove it
                 $serviceDefinition = $container->getDefinition($id);
                 $container->removeDefinition($id);
