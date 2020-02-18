@@ -11,10 +11,10 @@ use Fyrye\Bundle\PhpUnitsOfMeasureBundle\Registry\Manager;
 use Fyrye\Bundle\PhpUnitsOfMeasureBundle\Registry\QuantityDefinition;
 use PhpUnitsOfMeasure\PhysicalQuantityInterface;
 
-class TwigExtension extends \Twig_Extension
+class TwigExtension extends \Twig\Extension\AbstractExtension
 {
     /**
-     * @var array|\Twig_SimpleFilter[]
+     * @var array|\Twig\TwigFilter[]
      */
     private $filters = [];
 
@@ -38,7 +38,7 @@ class TwigExtension extends \Twig_Extension
     protected function setDefinitions($definitions)
     {
         foreach ($definitions as $name => $definition) {
-            $this->filters[] = new \Twig_SimpleFilter(
+            $this->filters[] = new \Twig\TwigFilter(
                 'uom_' . $name,
                 function ($value, $from, $to) use ($definition) {
                     return $definition->getUnit($value, $from)->toUnit($to);
@@ -86,7 +86,7 @@ class TwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('uom', [$this, 'getManager']),
+            new \Twig\TwigFunction('uom', [$this, 'getManager']),
         ];
     }
 
